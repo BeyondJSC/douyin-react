@@ -28,7 +28,7 @@ export const PopupContext = createContext<PopupContext>({
   closePopup: () => {} // 关闭弹窗
 })
 
-export function usePopup(popupVms: PopupVm[]) {
+export function usePopup (popupVms: PopupVm[]) {
   const [ popupVisible, setPopupVisible ] = useState(false)
   const [ popupHeight, setPopupHeight ] = useState(0)
 

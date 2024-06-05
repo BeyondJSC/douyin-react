@@ -43,6 +43,8 @@ const FooterTabs = React.memo(function (props: FooterTabProps) {
   }
 
   function handleTabClick(footerTab: FooterTab) {
+    // eslint-disable-next-line no-debugger
+    debugger
     if (activeTab === footerTab.type) {
       props.onRefresh && props.onRefresh(footerTab)
     } else {

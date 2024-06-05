@@ -22,4 +22,5 @@ export const HomeMainSlideStyle = styled.div`
   width: 100vw;
   height: calc(100vh - 56px); // 56px：footer height
   transition: height 0.4s ease-in-out;
+  overflow: hidden;
 `

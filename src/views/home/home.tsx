@@ -18,6 +18,23 @@ export interface HomeOutletContext {
   disableSwiperSlide: () => void,
 }
 
+export interface PopupProviderProps extends PopupContext {
+  children: React.ReactNode
+}
+
+export function PopupProvider(props: PopupProviderProps) {
+  const { children, popupVisible, popupHeight, openPopup, closePopup } = props
+
+  return (
+    <PopupContext.Provider value={{
+      popupVisible,
+      popupHeight,
+      openPopup,
+      closePopup
+    }}>{children}</PopupContext.Provider>
+  )
+}
+
 export default function Home() {
   const swiperRef = useRef<SwiperRefNode>(null)
   const [ activeSlideIdx, setActiveSlideIdx ] = useState<number>(1)
@@ -105,10 +122,15 @@ export default function Home() {
           <HomeSidebar />
         </div>
         <div className={`home-swiper__slide ${ (activeSlideIdx === 0 || popupVisible ) ? 'is-mask' : '' }`}>
-          <PopupContext.Provider value={{ popupVisible, popupHeight, openPopup, closePopup }}>
+          <PopupProvider 
+            popupVisible={popupVisible} 
+            popupHeight={popupHeight} 
+            openPopup={openPopup} 
+            closePopup={closePopup}
+          >
             <Outlet context={homeOutletContext} />
             <FooterTabs onTabChange={handleFooterTabChange} onRefresh={handleRefresh} />
-          </PopupContext.Provider>
+          </PopupProvider>
         </div>
         <div className="home-swiper__slide">
           <HomePersonal goBack={toPrevSlide} />
