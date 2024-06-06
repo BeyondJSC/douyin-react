@@ -25,7 +25,9 @@
     "mitt": "^3.0.1",
     "hox": "^2.1.1",
     "dayjs": "^1.11.11",
-    "keepalive-for-react": "^2.0.7"
+    "keepalive-for-react": "^2.0.7",
+    "@better-scroll/core": "^2.5.1",
+    "@better-scroll/pull-up": "^2.5.1"
   },
   "devDependencies": {
     "@types/react-lazy-load-image-component": "^1.6.4", 

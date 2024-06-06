@@ -4,8 +4,6 @@ export const HomeShoppingStyle = styled.div`
   padding: 12px;
   height: calc(100vh - 56px); // 56px：footer height
   width: 100vw;
-  overflow-x: hidden;
-  overflow-y: auto;
   box-sizing: border-box;
   background-color: #f8f8f8;
 
@@ -94,5 +92,9 @@ export const HomeShoppingStyle = styled.div`
         font-size: 24px;
       }
     }
+  }
+
+  .home-shopping__body {
+    height: calc(100% - 134px);
   }
 `

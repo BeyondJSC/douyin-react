@@ -1,4 +1,4 @@
-import { CSSProperties, ReactElement, useContext, useState } from "react"
+import { CSSProperties, ReactElement, useContext, useLayoutEffect, useState } from "react"
 import { FooterTabsStyle } from "./footer-tabs.style"
 import { PlusOutlined } from '@ant-design/icons'
 import { useLocation, useNavigate } from "react-router-dom"
@@ -9,6 +9,7 @@ import React from "react"
 export interface FooterTab {
   type: 'main' | 'shopping' | 'workbench' | 'message' | 'mine'
   link: string
+  isLightTheme: boolean // 是否是亮色主题
   name?: string
   icon?: ReactElement
   badge?: number
@@ -21,11 +22,11 @@ export interface FooterTabProps {
 
 const FooterTabs = React.memo(function (props: FooterTabProps) {
   const [ footerTabs ] = useState<FooterTab[]>([
-    { type: 'main', link: '/home/main', name: '首页' },
-    { type: 'shopping', link: '/home/shopping', name: '商城' },
-    { type: 'workbench', link: '/home/workbench', icon: <PlusOutlined /> },
-    { type: 'message', link: '/home/message', name: '消息', badge: 2 },
-    { type: 'mine', link: '/home/mine', name: '我' },
+    { type: 'main', link: '/home/main', name: '首页', isLightTheme: false },
+    { type: 'shopping', link: '/home/shopping', name: '商城', isLightTheme: true  },
+    { type: 'workbench', link: '/home/workbench', icon: <PlusOutlined />, isLightTheme: false  },
+    { type: 'message', link: '/home/message', name: '消息', badge: 2, isLightTheme: false  },
+    { type: 'mine', link: '/home/mine', name: '我', isLightTheme: false  },
   ])
 
   const { state } = useLocation()
@@ -36,19 +37,28 @@ const FooterTabs = React.memo(function (props: FooterTabProps) {
 
   const navigate = useNavigate()
 
-  const { isLightTheme } = useUserStore()
+  const { isLightTheme, setIsLightTheme } = useUserStore()
 
   const footerItemStyle: CSSProperties = {
     width: `${100 / footerTabs.length}%`
   }
 
+  useLayoutEffect(() => {
+    const footerTab = footerTabs.find(tab => tab.type === activeTab)
+
+    if (footerTab) {
+      setIsLightTheme(footerTab.isLightTheme) 
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [footerTabs, setIsLightTheme])
+
   function handleTabClick(footerTab: FooterTab) {
-    // eslint-disable-next-line no-debugger
-    debugger
     if (activeTab === footerTab.type) {
       props.onRefresh && props.onRefresh(footerTab)
     } else {
       navigate(footerTab.link, { replace: true, state: { footerType: footerTab.type }})
+
+      setIsLightTheme(footerTab.isLightTheme)
 
       props.onTabChange && props.onTabChange(footerTab)
     }

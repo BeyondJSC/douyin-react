@@ -1,18 +1,12 @@
 import { CameraOutlined, SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons"
-import { useUserStore } from "src/store/useUserStore"
-import { useEffect } from "react"
 import { HomeShoppingStyle } from "./home-shopping.style"
 import { useQuickEntry } from "./hooks/useQuickEntry"
+import ShoppingGoods from "./components/shopping-goods/shopping-goods"
 
 export default function HomeShopping() {
 
-  const { setIsLightTheme } = useUserStore()
 
   const { renderQuickEntry } = useQuickEntry()
-
-  useEffect(() => {   
-    setIsLightTheme(true)
-  }, [setIsLightTheme])
 
   return (
     <HomeShoppingStyle>
@@ -33,6 +27,9 @@ export default function HomeShopping() {
       </div>
       <div className="home-shopping__banner">
         { renderQuickEntry() }
+      </div>
+      <div className="home-shopping__body">
+        <ShoppingGoods />
       </div>
     </HomeShoppingStyle>
   )

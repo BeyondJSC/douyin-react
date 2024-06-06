@@ -11,7 +11,6 @@ import MainFollow from "./main-follow/main-follow"
 import MainExperience from "./main-experience/main-experience"
 import MainRecommend from "./main-recommend/main-recommend"
 import { PopupContext } from "../hooks/usePopup"
-import { useUserStore } from "src/store/useUserStore"
 
 function LiveTag() {
   return (
@@ -71,11 +70,6 @@ export default function HomeMain() {
   const { toPrevSlide, toNextSlide, enableSwiperSlide, disableSwiperSlide } = useOutletContext<HomeOutletContext>()
   const navigate = useNavigate()
   const { popupVisible, popupHeight, closePopup } = useContext(PopupContext)
-  const { setIsLightTheme } = useUserStore()
-
-  useEffect(() => {   
-    setIsLightTheme(false)
-  }, [setIsLightTheme])
 
   function disableTopSwipers() {
     disableSwiperSlide()

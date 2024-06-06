@@ -34,4 +34,4 @@
   
   - 瀑布流布局组件设计
 
-    TODO
+    采用绝对定位的方案，动态计算每个`item`的`top`和`left`, 支持`better-scroll`的下拉加载
