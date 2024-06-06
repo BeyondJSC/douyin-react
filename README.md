@@ -10,6 +10,10 @@
   - axios 处理网络请求
   - hox 
 # 项目亮点梳理
-  TODO
+  - 路由缓存及路由切换动画处理
+    路由缓存整体采用`createPortal`方案，将未激活的路由缓存在游离的Dom节点中
+    路由切换动画采用`react-transition-group`方案，通过`CSSTransition`组件实现路由切换动画效果
+    
+    由于`keep-alive`组件会在路由动画执行过程中被销毁，所以将`keep-alive`缓存的路由从`CSSTransition`的子组件中移出，然后通过`createPortal`将缓存内容`append`到指定`Dom`节点中，这样就能在路由切换动画执行过程中保持`keep-alive`缓存的内容
 
   
