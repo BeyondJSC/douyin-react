@@ -1,6 +1,6 @@
 import { CSSProperties, useRef, useState } from "react"
 import { NavTab } from "../header-navs"
-import { useLayoutEffectOnActivated } from "src/components/dy-keep-alive/keep-alive-provider"
+import { useEffectOnActivated } from "src/components/dy-keep-alive/keep-alive-provider"
 
 export function useActiveTab(navTabs: NavTab[], moveProgress: number) {
   const [ activeTab, setActiveTab ] = useState<NavTab['type']>('recommend')
@@ -25,7 +25,7 @@ export function useActiveTab(navTabs: NavTab[], moveProgress: number) {
     left: activeLeft + moveDistance + 'px'
   }
 
-  useLayoutEffectOnActivated((isActivated) => {
+  useEffectOnActivated((isActivated) => {
     if (!isActivated || navTabLefts.length > 0 ) return
 
     if (navTabRefs.current.length > 0) {
@@ -39,8 +39,6 @@ export function useActiveTab(navTabs: NavTab[], moveProgress: number) {
           lefts.push(x - containerLeft + (width - indicatorWidth) / 2)
         }
       })
-
-      // console.log(lefts)
 
       setNavTabLefts(lefts)
     }

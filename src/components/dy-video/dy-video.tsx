@@ -3,6 +3,7 @@ import { DyVideoStyle } from "./dy-video.style"
 import Icon from '@ant-design/icons'
 import { useVideoProgressBar } from "./hooks/useVideoProgressBar"
 import DyLoading from "../dy-loading/dy-loading"
+import { useEffectOnActivated } from "../dy-keep-alive/keep-alive-provider"
 
 export interface DyVideoProps {
   videoPoster: string
@@ -68,6 +69,14 @@ export default function DyVideo(props: DyVideoProps) {
       videoDom.removeEventListener('waiting', handleWaiting)
     }
   }, [isPlaying])
+
+  useEffectOnActivated(isActivated => {
+    if (isActivated && !isPlaying) {
+      startPlaying()
+    } else if (!isActivated && isPlaying) {
+      pausePlaying()
+    }
+  }, [])
 
   function startPlaying() {
     if (videoRef.current) {

@@ -42,6 +42,11 @@ export const PersonalVideoStyle = styled.div`
   }
 
   .personal-video__header {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    width: 100%;
     display: flex;
     align-items: center;
     height: 60px;

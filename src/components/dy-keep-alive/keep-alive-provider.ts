@@ -1,4 +1,4 @@
-import { DependencyList, createContext, useContext, useEffect } from "react"
+import { DependencyList, createContext, useContext, useEffect, useLayoutEffect } from "react"
 
 export interface KeepAliveContext {
   isActivated: boolean
@@ -23,13 +23,13 @@ export function useEffectOnActivated(callback: ActivatedCallback, deps: Dependen
       }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isActivated, callback, ...deps])
+  }, [isActivated, ...deps])
 }
 
 export function useLayoutEffectOnActivated(callback: ActivatedCallback, deps: DependencyList) {
   const { isActivated } = useContext(CacheComponentContext)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
 
     const destroyCb = callback(isActivated)
 
