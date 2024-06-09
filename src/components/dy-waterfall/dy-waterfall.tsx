@@ -1,13 +1,14 @@
 import { CSSProperties, useEffect, useMemo, useRef, useState } from "react"
 import { DyWaterfallStyle } from "./dy-waterfall.style"
 import useItemsStyle from "./hooks/useItemsStyle"
+import { ShoppingGood } from "src/views/home/home-shopping/services/home-shopping"
 
 export interface DyWaterfallProps { 
   className?: string
   columns?: number
   gap?: number
-  dataList: unknown[]
-  renderItem: (item: unknown, index: number) => React.ReactNode
+  dataList: ShoppingGood[]
+  renderItem: (item: ShoppingGood, index: number) => React.ReactNode
 }
 
 export default function DyWaterfall(props: DyWaterfallProps) {
@@ -21,7 +22,7 @@ export default function DyWaterfall(props: DyWaterfallProps) {
     return (wapperClientWidth - gap * (columns - 1)) / columns
   }, [columns, wapperClientWidth, gap])
 
-  const { itemsRef, itemsStyle, itemMaxHeight, isLayouting } = useItemsStyle(columns, dyWaterfallItemWidth, gap, props.dataList)
+  const { itemsStyle, itemMaxHeight, isLayouting } = useItemsStyle(columns, dyWaterfallItemWidth, gap, props.dataList)
 
   const dyWaterfallStyle:CSSProperties = {
     visibility: itemsStyle.length > 0 && !isLayouting ? 'visible' : 'hidden',
@@ -46,7 +47,6 @@ export default function DyWaterfall(props: DyWaterfallProps) {
             <div 
               className="dy-waterfall__item" 
               style={itemStyle}
-              ref={ref => itemsRef.current[index] = ref} 
               key={index}
             >
               { props.renderItem(item, index) }

@@ -8,7 +8,6 @@ export const ShoppingGoodsStyle = styled.div`
   .shopping-goods__item {
     width: 100%;
     color: black;
-    margin-bottom: 8px;
     box-sizing: border-box;
     background-color: #fff;
     border-radius: 8px;
@@ -29,7 +28,7 @@ export const ShoppingGoodsStyle = styled.div`
     &-row {
       display: flex;
       align-items: flex-end;
-      margin: 8px 0;
+      padding: 8px 0;
     }
 
     &-price {
@@ -45,8 +44,11 @@ export const ShoppingGoodsStyle = styled.div`
     }
 
     &-discount {
+      display: inline-block;
       color: #c7596a;
       padding: 0 8px;
+      height: 20px;
+      box-sizing: border-box;
       border: 1px solid #c7596a;
     }
 

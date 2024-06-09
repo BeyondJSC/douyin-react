@@ -96,3 +96,24 @@ export function copyStr(str: string) {
   document.execCommand('copy')
   document.body.removeChild(el)
 }
+
+export interface PreloadImageInfo {
+  width: number
+  height: number
+  img: HTMLImageElement
+}
+
+export function preloadImage(url: string): Promise<PreloadImageInfo> {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    img.onload = () => {
+      resolve({
+        width: img.width,
+        height: img.height,
+        img
+      })
+    }
+    img.onerror = () => reject(new Error('图片加载失败'))
+    img.src = url
+  })
+}

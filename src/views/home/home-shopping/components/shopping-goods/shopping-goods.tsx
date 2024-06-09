@@ -5,6 +5,7 @@ import { ShoppingGood, queryShoppingGoods } from "../../services/home-shopping"
 import { getFullImgaeUrl } from "src/utils"
 import BetterScroll from '@better-scroll/core'
 import BetterScrollPullup from '@better-scroll/pull-up'
+import { LazyLoadImage } from "react-lazy-load-image-component"
 
 BetterScroll.use(BetterScrollPullup)
 
@@ -19,8 +20,7 @@ export default function ShoppingGoods() {
     return queryShoppingGoods({
       pageNo,
       pageSize
-    }).then(({ data }) => {
-      const { list } = data
+    }).then(({ list }) => {
 
       if (list.length === 0) {
         // 没有更多数据了
@@ -69,7 +69,7 @@ export default function ShoppingGoods() {
 
     return (
       <div className="shopping-goods__item" key={index}>
-        <img className="shopping-goods__item-img" src={posterSrc} alt={shoppingGood.name} />
+        <LazyLoadImage className="shopping-goods__item-img" src={posterSrc} alt={shoppingGood.name} />
         <div className="shopping-goods__item-info">
           <div className="shopping-goods__item-name">{ shoppingGood.name }</div>
           { shoppingGood.discount ? <span className="shopping-goods__item-discount">{ shoppingGood.discount }</span> : <></> }
