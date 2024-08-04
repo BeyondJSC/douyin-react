@@ -25,7 +25,7 @@ function CheckedIcon() {
   )
 }
 
-const ForwardPopup = forwardRef<ForwardPopupExpose, ForwardPopupProps>((props, ref) => {
+const ForwardPopup = forwardRef<ForwardPopupExpose, ForwardPopupProps>((_, ref) => {
   const [ isVisible, setIsVisible ] = useState(false)
   const [ videoInfo, setVideoInfo ] = useState<RecommendVideoInfo | undefined>()
   const navigate = useNavigate()

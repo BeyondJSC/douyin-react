@@ -5,7 +5,7 @@ export interface DyNotificationExpose {
   notification: (message: string, duration?: number) => void
 }
 
-const DyNotification = forwardRef<DyNotificationExpose, unknown>((props, ref) => {
+const DyNotification = forwardRef<DyNotificationExpose, unknown>((_, ref) => {
   const [ isVisible, setIsVisible ] = useState(false)
   const [ message, setMessage ] = useState('')
 

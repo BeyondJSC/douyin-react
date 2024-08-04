@@ -22,8 +22,7 @@ export function useRecommendList(options?: RecommendVideoOptions) {
   const [ insertIndex, setInsertIndex ] = useState(0)
   const [ recommendList, setRecommendList ] = useState<Array<RecommendVideoInfo | null>>(new Array(RenderItemCount * 2).fill(null))
 
-  
-  function queryVideoRecommendedList(pageNo: number, pageSize: number, insertIndex: number) {
+  const queryVideoRecommendedList = (pageNo: number, pageSize: number, insertIndex: number) => {
     console.log(`开始请求第${pageNo}页的数据`)
 
     function updateRecommendList({ data }: BusinessData<QueryVideoRecommendedResponse>) {
@@ -53,7 +52,7 @@ export function useRecommendList(options?: RecommendVideoOptions) {
       pageNo,
       pageSize
     }).then(updateRecommendList)
-  } 
+  }
 
   useEffect(() => {
     queryVideoRecommendedList(pageNo, pageSize, insertIndex)
