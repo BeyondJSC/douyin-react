@@ -1,10 +1,11 @@
 import mockAdapter from 'axios-mock-adapter'
 import { requestInstacne } from "../vendors/request"
-import { QUERY_SHOP_RECOMMEND, QUERY_USER_FRIENDS, QUERY_USER_VIDEOS, QUERY_VIDEO_COMMENTS, QUERY_VIDEO_RECOMMENDED } from '../apis'
+import { QUERY_POST_RECOMMEND, QUERY_SHOP_RECOMMEND, QUERY_USER_FRIENDS, QUERY_USER_VIDEOS, QUERY_VIDEO_COMMENTS, QUERY_VIDEO_RECOMMENDED } from '../apis'
 import { getResultByPaganition } from '../utils'
 import RecommendViewList from '../assets/data/recommend-video.json'
 import ShopGoods from '../assets/data/goods.json'
 import UsersList from '../assets/data/users.json'
+import PostsList from '../assets/data/posts.json'
 import { VideoComment } from 'src/layouts/video-comment/services/video-comment'
 import { VideoInfo } from 'src/views/home/home-main/main-recommend/services/recommend'
 
@@ -97,6 +98,19 @@ export function startMock() {
       message: 'success',
       data: {
         total: (ShopGoods as unknown[]).length,
+        list: listData
+      }
+    }]
+  })
+
+  mockInstance.onGet(new RegExp(QUERY_POST_RECOMMEND)).reply(async (config) => {
+    const listData = getResultByPaganition(PostsList as unknown[], config.params.pageNo, config.params.pageSize)
+
+    return [200, {
+      code: 'ok',
+      message: 'success',
+      data: {
+        total: (PostsList as unknown[]).length,
         list: listData
       }
     }]

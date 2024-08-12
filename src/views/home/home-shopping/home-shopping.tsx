@@ -5,7 +5,6 @@ import ShoppingGoods from "./components/shopping-goods/shopping-goods"
 
 export default function HomeShopping() {
 
-
   const { renderQuickEntry } = useQuickEntry()
 
   return (

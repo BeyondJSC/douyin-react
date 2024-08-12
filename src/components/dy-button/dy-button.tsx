@@ -2,7 +2,7 @@ import React from "react"
 import { DyButtonStyle } from "./dy-button.style"
 
 export interface DyButtonProps extends React.PropsWithChildren {
-  type?: 'primary' | 'default'
+  type?: 'primary' | 'default' | 'text'
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 

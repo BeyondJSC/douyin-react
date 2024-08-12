@@ -3,7 +3,8 @@ import styled from "styled-components"
 export const DyButtonStyle = styled.div`
   color: #fff;
   border-radius: 8px;
-  height: 40px;
+  min-height: 32px;
+  height: 100%;
   padding: 0 12px;
   display: flex;
   align-items: center;

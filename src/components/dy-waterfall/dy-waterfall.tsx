@@ -1,14 +1,13 @@
 import { CSSProperties, useEffect, useMemo, useRef, useState } from "react"
 import { DyWaterfallStyle } from "./dy-waterfall.style"
 import useItemsStyle from "./hooks/useItemsStyle"
-import { ShoppingGood } from "src/views/home/home-shopping/services/home-shopping"
 
 export interface DyWaterfallProps { 
   className?: string
   columns?: number
   gap?: number
-  dataList: ShoppingGood[]
-  renderItem: (item: ShoppingGood, index: number) => React.ReactNode
+  dataList: unknown[]
+  renderItem: (item: unknown, index: number) => React.ReactNode
 }
 
 export default function DyWaterfall(props: DyWaterfallProps) {

@@ -23,7 +23,7 @@ function paddingHeight(data: ShoppingGood) {
   return basePaddingHeight
 }
 
-export default function useItemsStyle(columns: number, dyWaterfallItemWidth: number, gap: number, dataList: ShoppingGood[]) {
+export default function useItemsStyle(columns: number, dyWaterfallItemWidth: number, gap: number, dataList: unknown[]) {
   const [ itemsStyle, setItemsStyle ] = useState<CSSProperties[]>([]) 
   const [ itemMaxHeight, setItemMaxHeight ] = useState<number>(0)
   const [ isLayouting, setIsLayouting ] = useState(false)
@@ -37,10 +37,10 @@ export default function useItemsStyle(columns: number, dyWaterfallItemWidth: num
     setIsLayouting(true)
 
     for(let i = 0; i < dataList.length; i++) {
-      const originSize = dataList[i].originSize!
+      const originSize = (dataList[i] as ShoppingGood).originSize!
       const renderSize = {
         width: dyWaterfallItemWidth,
-        height: originSize.height * (dyWaterfallItemWidth / originSize.width) + paddingHeight(dataList[i])
+        height: originSize.height * (dyWaterfallItemWidth / originSize.width) + paddingHeight(dataList[i] as ShoppingGood)
       }
 
       if (i < columns) { // 第一行
